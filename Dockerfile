@@ -1,7 +1,7 @@
-FROM debian:10-slim
+FROM debian:bullseye-slim
 
 # Create the directory in which the scripts will be stored
-RUN mkdir -p /opt/ownCloud
+RUN mkdir -p /opt/ownCloud/log
 
 # Update, upgrade and install some packages
 RUN apt update \
@@ -26,9 +26,9 @@ RUN apt update \
     /usr/share/lintian
 
 # Add the ownCloud repository and install it
-RUN echo 'deb https://download.owncloud.com/desktop/ownCloud/stable/latest/linux/Debian_10/ /' > /etc/apt/sources.list.d/owncloud-client.list \
-    && wget -nv 'https://download.owncloud.com/desktop/ownCloud/stable/latest/linux/Debian_10/Release.key' -O Release.key \
-    && apt-key add - < Release.key \
+RUN echo 'deb https://download.owncloud.com/desktop/ownCloud/stable/2.11.1.8946/linux/Debian_11/ /' > /etc/apt/sources.list.d/owncloud-client.list \
+    && wget -nv 'https://download.owncloud.com/desktop/ownCloud/stable/latest/linux/Debian_11/Release.key' -O /tmp/Release.key \
+    && apt-key add - < /tmp/Release.key \
     && apt update \
     && apt install -yq --no-install-recommends \
     owncloud-client \
@@ -43,8 +43,7 @@ RUN echo 'deb https://download.owncloud.com/desktop/ownCloud/stable/latest/linux
     /usr/share/man \
     /usr/share/locale \
     /usr/share/info \
-    /usr/share/lintian \
-    /Release.key
+    /usr/share/lintian
 
 COPY *.sh /opt/ownCloud/
 WORKDIR /ocdata
