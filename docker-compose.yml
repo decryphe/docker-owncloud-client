@@ -2,13 +2,14 @@ occlient:
   image: dyonr/owncloud-client
   volumes:
     - ${PWD}/mydata:/ocdata
+    - ${PWD}/logs:/opt/ownCloud/log
   environment:
     - OC_USER=myuser
     - OC_PASS=mypass
     - OC_PROTO=https
     - OC_SERVER=myocserver.com
     - OC_URLPATH=/
-    - OC_WEBDAV=remote.php/webdav
+    - OC_WEBDAV=
     - OC_FILEPATH=/
     - TRUST_SELFSIGN=0
     - SYNC_HIDDEN=0
@@ -16,4 +17,3 @@ occlient:
     - RUN_INTERVAL=30
     - RUN_UID=99
     - RUN_GID=100
-

@@ -20,9 +20,9 @@ if [ "$SILENCE_OUTPUT" -eq 1 ]; then
 fi
 
 echo "[INFO] Running owncloudcmd as following:" | ts '%Y-%m-%d %H:%M:%.S'
-echo "[INFO] owncloudcmd $SELFSIGN $SYNCHIDDEN $SILENCEOUTPUT -n --non-interactive /ocdata $OC_PROTO://$OC_SERVER$OC_URLPATH$OC_WEBDAV$OC_FILEPATH" | ts '%Y-%m-%d %H:%M:%.S'
+echo "[INFO] owncloudcmd $SELFSIGN $SYNCHIDDEN $SILENCEOUTPUT --non-interactive --user $OC_USER --password $OC_PASS  /ocdata $OC_PROTO://$OC_SERVER$OC_URLPATH$OC_WEBDAV $OC_FILEPATH" | ts '%Y-%m-%d %H:%M:%.S'
 while true
 do 
-	su - occlient -c "owncloudcmd $SELFSIGN $SYNCHIDDEN $SILENCEOUTPUT -n --non-interactive /ocdata $OC_PROTO://$OC_SERVER$OC_URLPATH$OC_WEBDAV$OC_FILEPATH &> /opt/ownCloud/log/latest.log"
+	su - occlient -c "owncloudcmd $SELFSIGN $SYNCHIDDEN $SILENCEOUTPUT --non-interactive --user $OC_USER --password $OC_PASS  /ocdata $OC_PROTO://$OC_SERVER$OC_URLPATH$OC_WEBDAV $OC_FILEPATH &> /opt/ownCloud/log/latest.log"
 	sleep $RUN_INTERVAL
 done
